@@ -14,6 +14,7 @@ function App() {
         <Route path="/playlist" element={<Playlist />} />
         <Route path="/login" element={<Login />} />
         <Route path="/aboutus" element={<Aboutus />} />
+        <Route path="*" element={<Home />} />
         {/* not yet  */}
       </Routes>
     </>

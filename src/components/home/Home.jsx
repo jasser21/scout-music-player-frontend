@@ -1,7 +1,14 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 import Avatar from "../avatar/Avatar";
 import "./home.css";
 const Home = () => {
+  const navigate = useNavigate();
+
+  const navigateToLogin = () => {
+    // 👇️ navigate to /login
+    navigate("/login");
+  };
+
   return (
     <div className="homepage">
       <Avatar />
@@ -10,11 +17,9 @@ const Home = () => {
           Welcome to <span className="spn">Souccor,</span> <br />
           Listen To Tunisian Scout Chants For Free
         </div>
-        <a href="http://localhost:5173/login/">
-          <button className="btn" type="button">
-            Let&apos;s Do It
-          </button>
-        </a>
+        <button className="btn" type="button" onClick={navigateToLogin}>
+          Let&apos;s Do It
+        </button>
       </div>
     </div>
   );

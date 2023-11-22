@@ -3,7 +3,31 @@ import MusicPlayerSlider from "./MusicPlayerSlider";
 import api from "../../api/AudioManager";
 import { useEffect, useState } from "react";
 const Playlist = () => {
-  const [songList, setSongList] = useState([{ file_id: "", name: "" }]);
+  const [songList, setSongList] = useState([{}]);
+  const [fileid, setFileId] = useState(NaN);
+  const handleItemClick = (id) => {
+    setFileId(id);
+  };
+  useEffect(() => {
+    const fetchSong = async () => {
+      try {
+        const response = await api.get(`get-song/${fileid}`);
+        console.log(response.data);
+        setSongList(response.data.data);
+        console.log(songList);
+      } catch (err) {
+        if (err.response) {
+          // if this is not in the 200 response range
+          console.log(err.response.data);
+          console.log(err.response.status);
+          console.log(err.response.headers);
+        } else {
+          console.log(`Error : ${err.message}`);
+        }
+      }
+    };
+    fetchSong();
+  }, [fileid]);
   useEffect(() => {
     const fetchAudio = async () => {
       try {
@@ -31,7 +55,11 @@ const Playlist = () => {
         {songList &&
           songList.map((item) => {
             return (
-              <div className="item" key={item.file_id}>
+              <div
+                className="item"
+                key={item.id}
+                onClick={() => handleItemClick(item.id)}
+              >
                 {" "}
                 <p>{item.name}</p>{" "}
               </div>

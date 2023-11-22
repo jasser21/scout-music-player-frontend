@@ -1,4 +1,4 @@
 import axios from "axios";
 export default axios.create({
-  baseURL: "http://localhost:8000/audioManager/",
+  baseURL: "https://tunisian-scout-music-player-api.onrender.com/audioManager/",
 });

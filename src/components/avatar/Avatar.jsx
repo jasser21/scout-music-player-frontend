@@ -6,7 +6,7 @@ const Avatar = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setCount((count % 5) + 1);
-    }, 2000);
+    }, 1200);
     return () => clearTimeout(timer);
   });
   return (
