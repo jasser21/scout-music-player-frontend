@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import img from "../../assets/Logo.png";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -13,20 +13,6 @@ import FastRewindRounded from "@mui/icons-material/FastRewindRounded";
 import VolumeUpRounded from "@mui/icons-material/VolumeUpRounded";
 import VolumeDownRounded from "@mui/icons-material/VolumeDownRounded";
 import { Howl, Howler } from "howler";
-
-var sound = new Howl({
-  src: [
-    "https://ucf6eba7d0f726a8bbfeb55c243b.dl.dropboxusercontent.com/cd/0/get/CH2YdNZ0AwSuXTv-DNK2mo_xkNEA9sSSM6rnbXyx7H9ZPsXLU6nOB0UTtMqsxkpy6Pduu_X2frs4tFU7ZV48ymuSZHohUJsYC6zAdV9JacvlsxPk9LP8zJndi6NEYncs_1F-MuFjJ6GZesixDgHkIZKvIqT_Z96qDeQ4y6fHzauX0g/file",
-  ],
-  format: ["mp3"],
-  autoplay: false,
-  loop: true,
-  volume: 0.5,
-  onend: function () {
-    console.log("Finished!");
-  },
-  onseek: function () {},
-});
 
 const WallPaper = styled("div")({});
 
@@ -65,14 +51,36 @@ const TinyText = styled(Typography)({
   letterSpacing: 0.2,
 });
 
-export default function MusicPlayerSlider() {
+export default function MusicPlayerSlider(props) {
+  useEffect(() => {
+    const sound = new Howl({
+      src: [props.link],
+      format: ["mp3"],
+      autoplay: false,
+      loop: true,
+      volume: 0.5,
+      onplay: function () {
+        console.log("Playing!");
+      },
+      onend: function () {
+        console.log("Finished!");
+      },
+
+      onseek: function () {},
+    });
+
+    // Clean up the sound when the component unmounts
+    return () => {
+      sound.unload();
+    };
+  }, [props.link]);
   const theme = useTheme();
-  const handleClicky = () => {
-    sound.play();
-  };
   const duration = 200; // seconds
   const [position, setPosition] = React.useState(32);
   const [paused, setPaused] = React.useState(false);
+  const handleClicky = () => {
+    sound.play() ? paused : sound.pause();
+  };
   function formatDuration(value) {
     const minute = Math.floor(value / 60);
     const secondLeft = value - minute * 60;
@@ -97,13 +105,13 @@ export default function MusicPlayerSlider() {
               color="text.secondary"
               fontWeight={500}
             >
-              Emp1re
+              الكشافة التونسية
             </Typography>
             <Typography noWrap>
-              <b>znegi l7ay </b>
+              <b>{props.name} </b>
             </Typography>
             <Typography noWrap letterSpacing={-0.25}>
-              Note
+              بين نغمات الرمال
             </Typography>
           </Box>
         </Box>
@@ -170,7 +178,10 @@ export default function MusicPlayerSlider() {
           </IconButton>
           <IconButton
             aria-label={paused ? "play" : "pause"}
-            onClick={() => setPaused(!paused)}
+            onClick={() => {
+              setPaused(!paused);
+              handleClicky();
+            }}
           >
             {paused ? (
               <PlayArrowRounded
