@@ -52,8 +52,9 @@ const TinyText = styled(Typography)({
 });
 
 export default function MusicPlayerSlider(props) {
+  const [sound, setSound] = useState(null);
   useEffect(() => {
-    const sound = new Howl({
+    const newSound = new Howl({
       src: [props.link],
       format: ["mp3"],
       autoplay: false,
@@ -68,10 +69,10 @@ export default function MusicPlayerSlider(props) {
 
       onseek: function () {},
     });
-
+    setSound(newSound);
     // Clean up the sound when the component unmounts
     return () => {
-      sound.unload();
+      newSound.unload();
     };
   }, [props.link]);
   const theme = useTheme();
@@ -91,9 +92,6 @@ export default function MusicPlayerSlider(props) {
     theme.palette.mode === "dark" ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)";
   return (
     <Box sx={{ width: "100%", overflow: "hidden", marginTop: "150px" }}>
-      <button type="button" onClick={() => handleClicky()}>
-        play please
-      </button>
       <Widget>
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <CoverImage>

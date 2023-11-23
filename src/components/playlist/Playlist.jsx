@@ -68,7 +68,7 @@ const Playlist = () => {
                 onClick={() => handleItemClick(item.id)}
               >
                 {" "}
-                <p>{item.name}</p>{" "}
+                <p key={item.id * 100}>{item.name}</p>{" "}
               </div>
             );
           })}
