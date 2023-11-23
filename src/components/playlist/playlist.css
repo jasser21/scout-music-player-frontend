@@ -125,13 +125,12 @@ h4 {
   height: 40px;
   font-size: 2rem;
   margin: 2px;
+  transition: background-color 0.3s ease;
 }
+
 .item:hover {
-  background-color: #f2f2f248;
+  background-color: #f0f0f098;
 }
 p {
   margin: 0px;
-}
-p:hover {
-  background-color: #f2f2f26b;
 }
