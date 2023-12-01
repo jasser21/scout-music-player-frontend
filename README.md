@@ -1,12 +1,11 @@
-# Tunisian Scout Music React Frontend Application
-Welcome to the Tunisian Scout Music React frontend application! This application is built using React.js and utilizes additional libraries such as CSS, Howler.js, and Axios to provide an immersive and enjoyable music browsing and playback experience for Tunisian Scout music enthusiasts.
+# Tunisian Scout Music React Application UI
+Welcome to the Tunisian Scout Music React  application! This application is built using React.js and utilizes additional libraries such as CSS, Howler.js, and Axios to provide an immersive and enjoyable music browsing and playback experience for Tunisian Scout music enthusiasts.
 ## Application Deployment Details
-The Tunisian Scout Music React frontend application is deployed on Netlify, a popular hosting platform for modern web projects.
-
+This application is deployed on Netlify, a popular hosting platform for modern web projects.
 Deployment Platform: Netlify
 Application URL: [Tunisian Scout Music React App](https://scout-music-player.netlify.app)
 ## About the Application
-The Tunisian Scout Music React frontend application is designed to accomplish the following:
+The Tunisian Scout Music application is designed to accomplish the following:
 
 * Connect to the Tunisian Scout Music API to retrieve song lists and shared links
 * Display music albums and lyrics for easy navigation and exploration
